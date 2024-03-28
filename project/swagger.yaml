@@ -1,0 +1,126 @@
+openapi: 3.0.0
+info:
+  title: Todo API
+  description: CRUD operations for managing todos
+  version: 1.0.0
+
+paths:
+  /todos:
+    get:
+      summary: Get all todos
+      description: Retrieve a list of all todos.
+      responses:
+        '200':
+          description: Successful response with an array of todos.
+    post:
+      summary: Add a new todo
+      description: Add a new todo task.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task:
+                  type: string
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /todos/{id}:
+    put:
+      summary: Update a todo
+      description: Update the completion status of a todo.
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the todo to be updated.
+          required: true
+          schema:
+            type: integer
+        - in: body
+          name: completed
+          description: The completion status to be set.
+          required: true
+          schema:
+            type: object
+            properties:
+              completed:
+                type: boolean
+      responses:
+        '200':
+          description: Successful response with a message.
+    delete:
+      summary: Delete a todo
+      description: Delete a todo by its ID.
+      parameters:
+        - in: path
+          name: id
+          description: The ID of the todo to be deleted.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /signIn:
+    post:
+      summary: Sign In
+      description: Sign in with email and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /registration:
+    post:
+      summary: User Registration
+      description: Register a new user with email, password, birthdate, first name, and last name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                birthdate:
+                  type: string
+                  format: date
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /addSupervisor:
+    post:
+      summary: Add Supervisor
+      description: Add a supervisor with supervisor's email.
+      parameters:
+        - in: query
+          name: supervisorEmail
+          description: The email of the supervisor to be added.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with a message.

@@ -1,0 +1,22 @@
+Scope of Study: (Present a content outline for the proposed study, use additional paper if necessary)
+Project Scope:
+The project aims to develop a collaborative Todo List web application using ReactJS for the frontend, NodeJS for the backend, and SQL for database management. Users will be able to create personalized Todo lists, perform CRUD operations (add, update, delete), and share lists with others. The application will leverage Git for version control, Trello for project task tracking, and Docker for containerization.
+
+Technology Stack:
+Frontend: Developed using ReactJS for a dynamic and interactive user interface.
+Backend: Utilizes NodeJS to handle server-side logic and facilitate communication with the database. Database: SQL is employed for efficient data storage and retrieval.
+Version Control: Git is used for version control, enabling collaborative development and tracking changes. Containerization: Docker is implemented for containerization, ensuring consistent deployment and runtime environments.
+
+
+Key Features:
+Personalized Todo Lists: Users can create, customize, and manage their own Todo lists.
+Collaborative Sharing: Users have the ability to share their Todo lists with others for collaborative task management. CRUD Operations: Seamless functionality for adding, updating, and deleting tasks within the Todo lists.
+Version Control and Containerization: Utilizing Git for version control ensures efficient code management, while Docker facilitates easy deployment and scalability of the application.
+
+Week 1-2: Introduction and Project Selection
+Application of system design principles to the Todo List project, including exploration of tools and techniques for designing components in ReactJS, NodeJS, and SQL.
+Hands-on coding and implementation sessions for the Todo List web application, featuring weekly code reviews, troubleshooting, and the introduction of Git for version control.
+Overview of testing methodologies specific to the Todo List project, development of test plans, execution, iterative testing, and integration of testing practices into the development workflow. Detailed discussion on risk identification, assessment, and mitigation strategies, 
+with a focus on the Todo List project.
+Final project presentations, demonstrations, and peer review sessions, leading to the refinement of the Todo List project based on feedback.
+Initial projects submitted was ecommerce website but as we were suppose to do solo projects rather than teams hence I went for different project idea. Professor guided me well to select the topics and suggested the changes we can make to make the project better.
