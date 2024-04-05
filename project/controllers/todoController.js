@@ -4,7 +4,7 @@ const pool = require('../db');
 exports.getTodos = (req, res) => {
   const { userId } = req.params;
   console.log(`userId- ${userId}`)
-  pool.query('SELECT * FROM todos WHERE user_id = 1', [userId], (error, results) => {
+  pool.query('SELECT * FROM todos WHERE user_id = ?', [userId], (error, results) => {
     if (error) throw error;
     console.log(`results ${results}`)
     res.json(results);
