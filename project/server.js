@@ -15,7 +15,7 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 // Serve Swagger UI at the /api-docs endpoint
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/todos', todoRoutes);
+app.use('/', todoRoutes);
 
 app.get('*',function (req, res) {
   res.redirect('/api-docs');

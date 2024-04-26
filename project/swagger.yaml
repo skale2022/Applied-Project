@@ -5,16 +5,90 @@ info:
   version: 1.0.0
 
 paths:
-  /todos:
+  /{userId}/lists:
     get:
-      summary: Get all todos
-      description: Retrieve a list of all todos.
+      summary: Get all lists of a user
+      description: Retrieve all lists belonging to a user.
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
       responses:
         '200':
-          description: Successful response with an array of todos.
+          description: Successful response with an array of lists.
+
     post:
-      summary: Add a new todo
-      description: Add a new todo task.
+      summary: Add a new list
+      description: Add a new list for a user.
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                tasks:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      task:
+                        type: string
+                      completed:
+                        type: boolean
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /{userId}/lists/{listId}/tasks:
+    get:
+      summary: Get all tasks of a list
+      description: Retrieve all tasks belonging to a list.
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: listId
+          description: The ID of the list.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with an array of tasks.
+
+    post:
+      summary: Add a new task
+      description: Add a new task to a list.
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: listId
+          description: The ID of the list.
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -24,103 +98,171 @@ paths:
               properties:
                 task:
                   type: string
+                completed:
+                  type: boolean
       responses:
         '200':
           description: Successful response with a message.
 
-  /todos/{id}:
+  /{userId}/lists/{listId}/tasks/{taskId}:
     put:
-      summary: Update a todo
-      description: Update the completion status of a todo.
+      summary: Update a task
+      description: Update a task within a list.
       parameters:
         - in: path
-          name: id
-          description: The ID of the todo to be updated.
-          required: true
-          schema:
-            type: integer
-        - in: body
-          name: completed
-          description: The completion status to be set.
-          required: true
-          schema:
-            type: object
-            properties:
-              completed:
-                type: boolean
-      responses:
-        '200':
-          description: Successful response with a message.
-    delete:
-      summary: Delete a todo
-      description: Delete a todo by its ID.
-      parameters:
-        - in: path
-          name: id
-          description: The ID of the todo to be deleted.
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: Successful response with a message.
-
-  /signIn:
-    post:
-      summary: Sign In
-      description: Sign in with email and password.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-      responses:
-        '200':
-          description: Successful response with a message.
-
-  /registration:
-    post:
-      summary: User Registration
-      description: Register a new user with email, password, birthdate, first name, and last name.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                password:
-                  type: string
-                birthdate:
-                  type: string
-                  format: date
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-      responses:
-        '200':
-          description: Successful response with a message.
-
-  /addSupervisor:
-    post:
-      summary: Add Supervisor
-      description: Add a supervisor with supervisor's email.
-      parameters:
-        - in: query
-          name: supervisorEmail
-          description: The email of the supervisor to be added.
+          name: userId
+          description: The ID of the user.
           required: true
           schema:
             type: string
+        - in: path
+          name: listId
+          description: The ID of the list.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: taskId
+          description: The ID of the task to be updated.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                completed:
+                  type: boolean
+      responses:
+        '200':
+          description: Successful response with a message.
+
+    delete:
+      summary: Delete a task
+      description: Delete a task from a list.
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: listId
+          description: The ID of the list.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: taskId
+          description: The ID of the task to be deleted.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /{userId}/lists/{listId}:
+    delete:
+      summary: Delete a list
+      description: Delete a list by its ID.
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of the user.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: listId
+          description: The ID of the list to be deleted.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /{userId}/lists/{listId}/share:
+    post:
+      summary: Share a list
+      description: Share a list with another user.
+      parameters:
+        - in: path
+          name: userId
+          description: The ID of the user who owns the list.
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: listId
+          description: The ID of the list to be shared.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                permission:
+                  type: string
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /users:
+    get:
+      summary: Get all users
+      description: Retrieve a list of all users.
+      responses:
+        '200':
+          description: Successful response with an array of users.
+
+  /register:
+    post:
+      summary: Register User
+      description: Register a new user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Successful response with a message.
+
+  /login:
+    post:
+      summary: Login User
+      description: Log in a user with username and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
       responses:
         '200':
           description: Successful response with a message.
